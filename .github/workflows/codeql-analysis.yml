@@ -63,3 +63,17 @@ jobs:
     #
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+
+    # Analyze our code with OWASP's Dependency-Check
+    #
+    - name: Dependency-Check
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: 'WebGoat'
+        path: '.'
+        format: 'HTML'
+    - name: Upload Dependency-Check results
+      uses: actions/upload-artifact@master
+      with:
+         name: Dependency-Check Report
+         path: ${{github.workspace}}/reports
